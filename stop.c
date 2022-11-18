@@ -11,7 +11,9 @@ static void __exit exitfunc(void)
 	/* extern void unregister_chrdev_region(dev_t, unsigned); */
 	unregister_chrdev_region(dev_id, num_dev);
 	
-	printk(KERN_INFO "%s: majorNo:%d minorNo:%d Bye Kernel!!\n", __func__, majorNo, minorNo);
+	printk(KERN_INFO "%s: majorNo:%d \n", __func__, majorNo);
+	printk(KERN_INFO "%s: minorNo:%d \n", __func__, minorNo);
+	printk(KERN_INFO "%s: Bye Kernel!!\n", __func__);
 #ifdef PRINT
 	printk(KERN_INFO "%s: End...\n", __func__);
 #endif

@@ -37,7 +37,7 @@
 extern dev_t dev_id;
 extern unsigned int majorNo;
 extern unsigned int minorNo;
-extern unsigned int num_dev;
+extern unsigned int nod;
 
 typedef struct dev
 {
