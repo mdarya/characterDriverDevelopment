@@ -2,7 +2,7 @@
 #include "declarations.h"
 #include "fileOpers.h"
 
-dev_t dev_id;
+dev_t dev_id, devno;
 Dev *mydev;
 unsigned int majorNo, minorNo, nod;
 int regSize, noOfReg, devSize, dataSize;
@@ -51,13 +51,6 @@ static int __init initfunc(void)
 	 **/
 	majorNo = MAJOR(dev_id);
 	printk(KERN_INFO "%s: majorNo:%d \n", __func__, majorNo);
-	/* Desc	    : Macro that takes an argument of type dev_t, fetches it's LSB 20 bits, converts it into integer and returns it. 
-	 * Synopsis : MINOR(dev_t);
-	 * Inputs   : dev_t* dev_id 
-	 * Return   : int minorNo
-	 **/
-	minorNo = MINOR(dev_id);
-	printk(KERN_INFO "%s: minorNo:%d \n", __func__, minorNo);
 
 	/* Desc     : kmalloc is the normal method of allocating memory for objects smaller than page size in the kernel. 
 	 * Synopsis : void * kmalloc (size_t size, gfp_t flags); 
@@ -73,32 +66,44 @@ static int __init initfunc(void)
 		goto OUT;
 	}
 
-	/* Desc     : Initialise the c_dev kernel structure available in linux/cdev.h.
-	 * Synopsis : void cdev_init (struct cdev* cdev, const struct file_operations* fops);
-	 * Inputs   : cdev - The structure to initialise
-	 * 	      *fops - The file operations for this device
-	 * Return   : void 
-	 **/
-	cdev_init(&mydev->c_dev, &fops);
-
-	/* Desc     : Adds a char device to the system (device table) and make it live immediately.
-	 * Synopsis : int cdev_add (struct cdev* cdev, dev_t dev, unsigned count);
-	 * Inputs   : *cdev - The cdev structure for the device
-	 * 	      dev - The first device number for which this device is responsible
-	 * 	      count - The number of consecutive minor numbers corresponding to this device
-	 * Return   : A negative error code is returned on failure.
-	 **/
-	ret = cdev_add(&mydev->c_dev, dev_id, 1);
-	if(ret < 0)
+	for(i = 0; i < nod; i++)
 	{
-		printk(KERN_ERR "%s: cdev_add() return failure !!!\n",__func__);
-		goto OUT;
-	}
+		/* Desc     : Initialise the c_dev kernel structure available in linux/cdev.h.
+		 * Synopsis : void cdev_init (struct cdev* cdev, const struct file_operations* fops);
+		 * Inputs   : cdev - The structure to initialise
+		 * 	      *fops - The file operations for this device
+		 * Return   : void 
+		 **/
+		cdev_init(&mydev[i].c_dev, &fops);
 
-	majorNo = MAJOR(mydev->c_dev.dev);
-	minorNo = MINOR(mydev->c_dev.dev);
-	printk(KERN_INFO "%s: majorNo:%d \n", __func__, majorNo);
-	printk(KERN_INFO "%s: minorNo:%d \n", __func__, minorNo);
+		/* Desc	    : Macro that takes an argument of type dev_t, fetches it's LSB 20 bits, converts it into integer and returns it. 
+		 * Synopsis : MINOR(dev_t);
+		 * Inputs   : dev_t* dev 
+		 * Return   : int minorNo
+		 **/
+		minorNo = MINOR(mydev[i].c_dev.dev);
+		printk(KERN_INFO "%s: minorNo:%d \n", __func__, minorNo);
+
+		/* Desc     : MKDEV is the macro which takes major and minor numbers and returns combined number.
+		 * Return   : Returns a combined dev_t devno 
+		 **/
+		devno = MKDEV(majorNo, minorNo);
+
+		/* Desc     : Adds a char device to the system (device table) and make it live immediately.
+		 * Synopsis : int cdev_add (struct cdev* cdev, dev_t dev, unsigned count);
+		 * Inputs   : *cdev - The cdev structure for the device
+		 * 	      dev - The first device number for which this device is responsible
+		 * 	      count - The number of consecutive minor numbers corresponding to this device
+		 * Return   : A negative error code is returned on failure.
+		 **/
+		ret = cdev_add(&mydev[i].c_dev, devno, 1);
+		if(ret < 0)
+		{
+			printk(KERN_ERR "%s: cdev_add() return failure !!!\n",__func__);
+			goto OUT;
+		}
+
+	}
 
 	printk(KERN_INFO "%s: Hello Kernel!!\n", __func__);
 #ifdef PRINT

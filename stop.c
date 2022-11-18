@@ -3,10 +3,15 @@
 
 static void __exit exitfunc(void)
 {
+	int i;
 #ifdef PRINT
 	printk(KERN_INFO "%s: Begin...\n", __func__);
 #endif
-	cdev_del(&mydev->c_dev);
+	for(i = 0; i < nod; i++)
+	{
+		cdev_del(&mydev[i].c_dev);
+	}
+	
 	kfree(mydev);
 	/* extern void unregister_chrdev_region(dev_t, unsigned); */
 	unregister_chrdev_region(dev_id, nod);

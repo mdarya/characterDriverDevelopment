@@ -34,7 +34,7 @@
 #define DATASIZE 0
 #endif
 
-extern dev_t dev_id;
+extern dev_t dev_id, devno;
 extern unsigned int majorNo;
 extern unsigned int minorNo;
 extern unsigned int nod;
