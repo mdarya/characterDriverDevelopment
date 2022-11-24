@@ -37,7 +37,7 @@ void* openDev(void* arg)
 		(*fptr[1])((void*)"failure");
 	}
 
-	printf("App %s: filename=%s\n", __func__, filename);
+	printf("App %s: fd=%d,filename=%s\n", __func__, fd, filename);
 
 	printf("App %s: End\n", __func__);
 	return (void*)0;

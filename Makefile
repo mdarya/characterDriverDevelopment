@@ -2,7 +2,7 @@ INSTALL_DIR=modules
 ifneq (${KERNELRELEASE},)
 	obj-m := mycdd.o
 
-mycdd-objs := start.o stop.o 
+mycdd-objs := start.o stop.o openDevice.o releaseDevice.o 
 
 else
 #	KERNELDIR ?= /lib/modules/4.13.12/build

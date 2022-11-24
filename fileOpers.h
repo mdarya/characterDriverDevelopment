@@ -1,1 +1,5 @@
-struct file_operations fops = {};
+struct file_operations fops = 
+{
+	open: openDevice,
+	release: releaseDevice
+};

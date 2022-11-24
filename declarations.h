@@ -49,3 +49,5 @@ typedef struct dev
 }Dev;
 extern Dev *mydev;
 
+int openDevice(struct inode *, struct file *);
+int releaseDevice(struct inode *, struct file *);

@@ -1,5 +1,4 @@
 #! /bin/bash
-echo
 
 mainMenu()
 {
@@ -7,8 +6,9 @@ mainMenu()
         echo "1: Build Driver"
         echo "2: Insert Driver"
         echo "3: Look Into Driver"
-        echo "4: Test with Application"
-        echo "5: Remove Driver"
+        echo "4: Build Application"
+        echo "5: Test with Application"
+        echo "6: Remove Driver"
         echo "0: Exit Script"
         read -n1 -p "Please Enter your Choice:"
         case $REPLY in
@@ -22,9 +22,13 @@ mainMenu()
                         lookIntoDriver
                         ;;
                 4)
-                        testWithApp
+                        buildApp
                         ;;
                 5)
+			majorno=`getMajorNo`
+                        testWithApp $majorno
+                        ;;
+                6)
                         removeDriver
                         ;;
                 0)
