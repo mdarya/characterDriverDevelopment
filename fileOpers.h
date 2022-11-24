@@ -1,1 +1,1 @@
-const struct file_operations fops = { };
+struct file_operations fops = {};

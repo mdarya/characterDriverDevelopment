@@ -47,6 +47,5 @@ typedef struct dev
 	int dataSize;
 	struct cdev c_dev;
 }Dev;
-
 extern Dev *mydev;
 
