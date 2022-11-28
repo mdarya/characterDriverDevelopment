@@ -29,7 +29,7 @@ void* openDev(void* arg)
 	}while(1);
 	printf("App %s: filename=%s\n", __func__, filename);
 	
-	fd = open(filename, O_WRONLY);
+	fd = open(filename, O_RDWR);
 	if(fd == -1)
 	{
 		perror("File opening error!!!");

@@ -14,6 +14,8 @@ int openDevice(struct inode *inodep, struct file *filep)
 		goto OUT;
 	}
 
+	filep->private_data = ldev;
+
 #ifdef PRINT
 	printk(KERN_INFO "%s: End\n", __func__);
 #endif
