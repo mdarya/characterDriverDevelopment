@@ -35,10 +35,14 @@
 #endif
 
 extern dev_t dev_id, devno;
-extern unsigned int majorNo;
-extern unsigned int minorNo;
-extern unsigned int nod;
+extern unsigned int majorNo, minorNo, nod;
+extern int regSize, noOfReg, devSize, dataSize;
 
+typedef struct qset
+{
+	struct qset *next;
+	void **data;
+}Qset;
 typedef struct dev
 {
 	int regSize;
@@ -46,6 +50,7 @@ typedef struct dev
 	int devSize;
 	int dataSize;
 	struct cdev c_dev;
+	struct qset *first;
 }Dev;
 extern Dev *mydev;
 

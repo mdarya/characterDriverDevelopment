@@ -14,5 +14,5 @@ default:
 	@mkdir ${INSTALL_DIR}
 	@mv -f *.o *.ko *.mod.c .*.cmd ${INSTALL_DIR}
 clean:
-	rm -rf ${INSTALL_DIR} *.order *.symvers *.mod app mydevfile
+	rm -rf ${INSTALL_DIR} *.order *.symvers *.mod app
 endif
