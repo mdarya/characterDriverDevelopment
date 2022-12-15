@@ -2,7 +2,7 @@ INSTALL_DIR=modules
 ifneq (${KERNELRELEASE},)
 	obj-m := mycdd.o
 
-mycdd-objs := start.o stop.o openDevice.o releaseDevice.o writeDevice.o readDevice.o 
+mycdd-objs := start.o stop.o openDevice.o releaseDevice.o writeDevice.o readDevice.o trimDevice.o 
 
 else
 #	KERNELDIR ?= /lib/modules/4.13.12/build
@@ -14,5 +14,5 @@ default:
 	@mkdir ${INSTALL_DIR}
 	@mv -f *.o *.ko *.mod.c .*.cmd ${INSTALL_DIR}
 clean:
-	rm -rf ${INSTALL_DIR} *.order *.symvers *.mod
+	rm -rf ${INSTALL_DIR} *.order *.symvers *.mod app mydevfile
 endif

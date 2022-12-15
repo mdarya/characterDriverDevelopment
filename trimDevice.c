@@ -1,7 +1,7 @@
 #include "headers.h"
 #include "declarations.h"
 
-ssize_t readDevice(struct file *filep, char __user *ubuff, size_t size, loff_t *seekp)
+int trimDevice(Dev *fdev)
 {
 #ifdef PRINT
 	printk(KERN_INFO "%s: Begin\n", __func__);

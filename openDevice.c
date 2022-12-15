@@ -16,6 +16,11 @@ int openDevice(struct inode *inodep, struct file *filep)
 
 	filep->private_data = ldev;
 
+	if((filep->f_flags & O_ACCMODE) == O_WRONLY)
+	{
+		trimDevice(ldev);	
+	}
+
 #ifdef PRINT
 	printk(KERN_INFO "%s: End\n", __func__);
 #endif
