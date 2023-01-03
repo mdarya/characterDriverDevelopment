@@ -3,7 +3,7 @@
 
 ssize_t readDevice(struct file *filep, char __user *ubuff, size_t size, loff_t *seekp)
 {
-	int noctr, nocsr, i, ret;
+	int noctr, nocsr, nocnr, i;
 	size_t lsize;
 	Dev *ldev;
 	Qset *item;
@@ -28,12 +28,12 @@ ssize_t readDevice(struct file *filep, char __user *ubuff, size_t size, loff_t *
 		if(noctr > ldev->regSize)
 			noctr = ldev->regSize;
 
-		ret = copy_to_user(ubuff+nocsr, item->data[i], noctr);
-		if(ret > 0)
+		nocnr = copy_to_user(ubuff+nocsr, item->data[i], noctr);
+		if(nocnr > 0)
 		{
 			printk(KERN_INFO "%s: Partial Read\n", __func__);
 		}
-		nocsr = nocsr + (noctr - ret);
+		nocsr = nocsr + (noctr - nocnr);
 		noctr = lsize - nocsr;
 		if(i == ldev->noOfReg-1)
 		{
