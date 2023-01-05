@@ -19,9 +19,9 @@ int trimDevice(Dev *fdev)
 		return 0;
 	}
 	lit = slit = fdev->first;
+	j = 0;
 	while(fdev->first)
 	{
-		j = 0;
 		while(lit->next)
 		{
 			slit = lit;

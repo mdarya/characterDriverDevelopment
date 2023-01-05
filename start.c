@@ -82,11 +82,12 @@ static int __init initfunc(void)
 		devno = MKDEV(majorNo, i);
 		
 		/* Init all the structure members with the values captured module_param args */
+		mydev[i].regSize   = regSize;
+		mydev[i].noOfReg   = noOfReg;
+		mydev[i].devSize   = devSize;
+		mydev[i].dataSize  = dataSize;
 		mydev[i].c_dev.ops = &fops;
-		mydev[i].regSize = regSize;
-		mydev[i].noOfReg = noOfReg;
-		mydev[i].devSize = devSize;
-		mydev[i].dataSize = dataSize;
+		mydev[i].first     = NULL;
 
 		/* Desc     : Adds a char device to the system (device table) and make it live immediately.
 		 * Synopsis : int cdev_add (struct cdev* cdev, dev_t dev, unsigned count);
