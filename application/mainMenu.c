@@ -12,6 +12,7 @@ void* mainMenu(void* arg)
 	printf("App: 2: Close Device\n");
 	printf("App: 3: Write into Device\n");
 	printf("App: 4: Read from Device\n");
+	printf("App: 5: Seek into Device\n");
 	printf("App: Please Enter your choice:");
 	scanf(" %d", &i);
 	

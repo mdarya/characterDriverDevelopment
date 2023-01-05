@@ -1,8 +1,10 @@
 #! /bin/bash
 
-app: main.o init.o mainMenu.o exitFunc.o openDev.o closeDev.o writeDev.o readDev.o
-	gcc -o app main.o init.o mainMenu.o exitFunc.o openDev.o closeDev.o writeDev.o readDev.o
+app: main.o init.o mainMenu.o exitFunc.o openDev.o closeDev.o writeDev.o readDev.o lseekDev.o
+	gcc -o app main.o init.o mainMenu.o exitFunc.o openDev.o closeDev.o writeDev.o readDev.o lseekDev.o
 
+lseekDev.o: lseekDev.c headers.h declarations.h
+	gcc -c lseekDev.c
 readDev.o: readDev.c headers.h declarations.h
 	gcc -c readDev.c
 writeDev.o: writeDev.c headers.h declarations.h

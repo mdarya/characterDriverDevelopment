@@ -8,6 +8,7 @@ void* openDev(void*);
 void* closeDev(void*);
 void* writeDev(void*);
 void* readDev(void*);
+void* lseekDev(void*);
 
 int init()
 {
@@ -19,6 +20,7 @@ int init()
 	fptr[3] = closeDev;
 	fptr[4] = writeDev;
 	fptr[5] = readDev;
+	fptr[6] = lseekDev;
 
 	printf("App %s: End\n", __func__);
 	return 0;

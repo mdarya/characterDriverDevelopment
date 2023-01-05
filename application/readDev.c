@@ -8,7 +8,7 @@ void* readDev(void* arg)
 	printf("App %s: Begin\n", __func__);
 	
 	memset(rbuf, '\0', 256);
-	lseek(fd, 0, SEEK_SET);
+	//lseek(fd, 0, SEEK_SET);
 	ret = read(fd, rbuf, 256);
 	if(ret == -1)
 	{

@@ -59,4 +59,5 @@ int releaseDevice(struct inode *, struct file *);
 ssize_t writeDevice(struct file *, const char __user *, size_t, loff_t *);
 ssize_t readDevice(struct file *, char __user *, size_t, loff_t *);
 int trimDevice(Dev *);
+loff_t lseekDevice(struct file *, loff_t, int);
 
