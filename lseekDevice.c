@@ -11,16 +11,16 @@ loff_t lseekDevice(struct file *filep, loff_t offset, int origin)
 	switch(origin)
 	{
 		case 0: //SEEK_SET
-			//if((long)offset > devSize)
+			//if((long)offset < devSize)
 			newpos = offset;
 			break;
 		case 1: //SEEK_CUR
-			//if((long)offset + (long)filep->f_pos > devSize)
+			//if( ((long)offset + (long)filep->f_pos < devSize)&&((long)offset - (long)filep->f_pos >=0) )
 			newpos = filep->f_pos + offset;
 			break;
 		case 2: //SEEK_END
 			//if((long)offset + (long)filep->f_pos > devSize)
-			newpos = devSize + offset;
+			newpos = devSize - offset;
 			break;
 		default:
 			printk(KERN_ERR "%s: Invalid Origin\n", __func__);
